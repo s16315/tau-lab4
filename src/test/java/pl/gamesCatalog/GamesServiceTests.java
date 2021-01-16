@@ -47,9 +47,16 @@ public class GamesServiceTests {
 	}
 
 	@Test
-	public void testDlcGetBadId(){
+	public void testGameGetDlcNumber(){
 		Dlc tempDlc = mock(Dlc.class);
 		game2.addDlc(tempDlc);
+		assertEquals(1, game2.getDlcNumber());
+		System.out.println("Getting dls number is ok");
+	}
+
+	@Test
+	public void testDlcGetBadId(){
+		Dlc tempDlc = mock(Dlc.class);
 		when(game2.getDlcById(0)).thenReturn(tempDlc);
 
 		try {
