@@ -57,8 +57,7 @@ public class GamesServiceTests {
 	@Test
 	public void testDlcGetBadId(){
 		Dlc tempDlc = mock(Dlc.class);
-		when(game2.getDlcById(0)).thenReturn(tempDlc);
-
+		when(tempDlc.getId()).thenReturn(Long.valueOf(0));
 		try {
 			game2.getDlcById(0);
 			game2.getDlcById(1);
