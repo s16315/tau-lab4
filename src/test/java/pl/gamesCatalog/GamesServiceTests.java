@@ -1,6 +1,9 @@
 package pl.gamesCatalog;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import java.util.ArrayList;
 import org.junit.*;
 
@@ -10,7 +13,9 @@ public class GamesServiceTests {
 	private Game game0;
 	private Game game1;
 	private Game game2;
-	
+	private Dlc game1Dlc1;
+	private Dlc game2Dlc1;
+
 	@Before
 	public void setUp(){
 		game0 = new Game("Szybkersi", 10, 0);
@@ -30,7 +35,18 @@ public class GamesServiceTests {
 	}
 
 	@Test
-	public void testCreate() {
+	public void testDlcInGame(){
+		Game tempGame = mock(Game.class);
+		Dlc tempGameDlc1 = new Dlc("Dodatek1", 12, "Świetny dodatek", tempGame.getId(), 1);
+		Dlc tempGameDlc2 = new Dlc("Dodatek2", 11, "Słaby dodatek", tempGame.getId(), 2);
+		tempGame.addDlc(tempGameDlc1);
+		tempGame.addDlc(tempGameDlc2);
+		assertEquals(tempGameDlc1, tempGame.getDlcById(tempGameDlc1.getId()));
+		System.out.println("Getting a dls by id is ok");
+	}
+
+	@Test
+	public void testCreateGame() {
 		gamesService.create(game0);
 		Game result = gamesService.readById(game0.getId());
 		assertSame(result.getName(), game0.getName());
@@ -39,7 +55,7 @@ public class GamesServiceTests {
 	}	
 
 	@Test
-	public void testCreateCatchBadId() {
+	public void testCreateGameCatchBadId() {
 		gamesService.create(game0);
 		
 		try {
@@ -53,7 +69,7 @@ public class GamesServiceTests {
 	}		
 	
 	@Test
-	public void testUpdate() {
+	public void testUpdateGame() {
 		gamesService.create(game0);
 		game1.setId(game0.getId());
 		gamesService.update(game1);
@@ -64,7 +80,7 @@ public class GamesServiceTests {
 	}		
 	
 	@Test
-	public void testDelete() {
+	public void testDeleteGame() {
 		gamesService.create(game0);
 		gamesService.delete(game0);
 		ArrayList<Game> result = gamesService.readAll();

@@ -1,10 +1,13 @@
 package pl.gamesCatalog;
 
+import java.util.ArrayList;
+
 public class Game extends Entity{
     private String name;
     private int pegi;
     private Boolean haveDemo;
     private String description;
+    private ArrayList<Dlc> dlcs;
 
 
     public Game(String name, int pegi, long id) {
@@ -54,5 +57,22 @@ public class Game extends Entity{
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void addDlc(Dlc dlc){
+        this.dlcs.add(dlc);
+    }
+
+    public ArrayList<Dlc> getAllDlc(){
+        return this.dlcs;
+    }
+
+    public Dlc getDlcById(long id){
+        for (Dlc d: this.dlcs){
+            if (d.getId() == id){
+                return d;
+            }
+        }
+        throw new IllegalArgumentException("Not existing Id!");
     }
 }
