@@ -37,16 +37,11 @@ public class GamesServiceTests {
 
 	@Test
 	public void testDlcInGame(){
-		//Dlc tempGameDlc1 = new Dlc("Dodatek1", 12, "Świetny dodatek", game2.getId(), 0);
-		//Dlc tempGameDlc2 = new Dlc("Dodatek2", 11, "Słaby dodatek", game2.getId(), 1);
-
-		Dlc tempGameDlc1 = mock(Dlc.class);
-		given(tempGameDlc1.getId()).willReturn(Long.valueOf(0));
-		Dlc tempGameDlc2 = mock(Dlc.class);
-		given(tempGameDlc1.getId()).willReturn(Long.valueOf(1));
+		Dlc tempGameDlc1 = new Dlc("Dodatek1", 12, "Świetny dodatek", game2.getId(), 0);
+		Dlc tempGameDlc2 = new Dlc("Dodatek2", 11, "Słaby dodatek", game2.getId(), 1);
 		game2.addDlc(tempGameDlc1);
 		game2.addDlc(tempGameDlc2);
-
+		assertEquals(tempGameDlc1, game2.getDlcById(0));
 		assertEquals(tempGameDlc2, game2.getDlcById(1));
 		System.out.println("Getting a dls by id is ok");
 	}
