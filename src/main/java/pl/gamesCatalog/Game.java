@@ -16,6 +16,7 @@ public class Game extends Entity{
         this.haveDemo = false;
         this.description = " ";
         this.setId(id);
+        this.dlcs = new ArrayList<>();
     }
 
     public Game(String name, int pegi, Boolean haveDemo, String description, long id) {
@@ -74,5 +75,9 @@ public class Game extends Entity{
             }
         }
         throw new IllegalArgumentException("Not existing Id!");
+    }
+
+    public int getDlcNumber(){
+        return this.dlcs.size();
     }
 }

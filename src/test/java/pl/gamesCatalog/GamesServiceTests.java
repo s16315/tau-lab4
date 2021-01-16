@@ -1,6 +1,7 @@
 package pl.gamesCatalog;
 
 import static org.junit.Assert.*;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -36,13 +37,34 @@ public class GamesServiceTests {
 
 	@Test
 	public void testDlcInGame(){
-		Game tempGame = mock(Game.class);
-		Dlc tempGameDlc1 = new Dlc("Dodatek1", 12, "Świetny dodatek", tempGame.getId(), 1);
-		Dlc tempGameDlc2 = new Dlc("Dodatek2", 11, "Słaby dodatek", tempGame.getId(), 2);
-		tempGame.addDlc(tempGameDlc1);
-		tempGame.addDlc(tempGameDlc2);
-		assertEquals(tempGameDlc1, tempGame.getDlcById(tempGameDlc1.getId()));
+		//Dlc tempGameDlc1 = new Dlc("Dodatek1", 12, "Świetny dodatek", game2.getId(), 0);
+		//Dlc tempGameDlc2 = new Dlc("Dodatek2", 11, "Słaby dodatek", game2.getId(), 1);
+
+		Dlc tempGameDlc1 = mock(Dlc.class);
+		given(tempGameDlc1.getId()).willReturn(Long.valueOf(0));
+		Dlc tempGameDlc2 = mock(Dlc.class);
+		given(tempGameDlc1.getId()).willReturn(Long.valueOf(1));
+		game2.addDlc(tempGameDlc1);
+		game2.addDlc(tempGameDlc2);
+
+		assertEquals(tempGameDlc2, game2.getDlcById(1));
 		System.out.println("Getting a dls by id is ok");
+	}
+
+	@Test
+	public void testDlcGetBadId(){
+		Dlc tempDlc = mock(Dlc.class);
+		game2.addDlc(tempDlc);
+		when(game2.getDlcById(0)).thenReturn(tempDlc);
+
+		try {
+			game2.getDlcById(0);
+			game2.getDlcById(1);
+			fail("Catch bad id in getting dlc - No exception");
+		}
+		catch (IllegalArgumentException e){
+			System.out.println("Catch bad id in getting dlc ok");
+		}
 	}
 
 	@Test
@@ -60,7 +82,7 @@ public class GamesServiceTests {
 		
 		try {
 			gamesService.create(game0);
-			fail("No exception");
+			fail("Catch bad id in game creating - No exception");
 		}
 		catch(IllegalArgumentException e) {
 			System.out.println("Catch bad id in game creating ok");	
