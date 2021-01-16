@@ -1,4 +1,4 @@
-gamesCatalog\GamesService.class
-gamesCatalog\Game.class
-gamesCatalog\Entity.class
-gamesCatalog\IGamesService.class
+pl\gamesCatalog\Game.class
+pl\gamesCatalog\GamesService.class
+pl\gamesCatalog\IGamesService.class
+pl\gamesCatalog\Entity.class

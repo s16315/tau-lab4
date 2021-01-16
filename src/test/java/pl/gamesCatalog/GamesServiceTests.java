@@ -1,14 +1,13 @@
-package gamesCatalog;
+package pl.gamesCatalog;
 
 import static org.junit.Assert.*;
-
 import java.util.ArrayList;
-
 import org.junit.*;
+
 
 public class GamesServiceTests {
 	private GamesService gamesService;
-	private Game game0; 
+	private Game game0;
 	private Game game1;
 	private Game game2;
 	

@@ -1,4 +1,4 @@
-package gamesCatalog;
+package pl.gamesCatalog;
 import java.time.LocalDateTime;
 
 public abstract class Entity {
